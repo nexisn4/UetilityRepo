@@ -28,14 +28,23 @@ namespace Uetility
 
         private void Button1Click(object sender, System.EventArgs e)
         {
-            Myprint("clicked button1");
-            RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+            int randomInt = new Random().Next(0, 2);
+
+            if (Convert.ToBoolean(randomInt))
+            {
+                RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+            }
+            else
+            {
+                RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
+            }
+
+            Myprint("rand: " + randomInt);
         }
 
         private void Button2Click(object sender, System.EventArgs e)
         {
             Myprint("clicked button2");
-            RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
         }
 
         private void Myprint(string s)
