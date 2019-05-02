@@ -9,6 +9,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
+
 namespace Uetility
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -41,11 +42,21 @@ namespace Uetility
             {
                 RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
             }
-            Myprint(Convert.ToString(RequestedOrientation));
         }
 
         private void Button2Click(object sender, System.EventArgs e)
         {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "location")
+                   .SetAutoCancel(true)
+                   .SetContentTitle("my notificaiton")
+                   .SetSmallIcon(Resource.Drawable.abc_scrubber_primary_mtrl_alpha)
+                   .SetContentText("cuck cuck");
+
+            NotificationManager notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
+            notificationManager.Notify(100, builder.Build());
+
+
+            Myprint("kkkkk");
         }
 
         private void Myprint(string s)
