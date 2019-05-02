@@ -1,8 +1,10 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V4.App;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
@@ -12,6 +14,7 @@ namespace Uetility
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private bool number;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,23 +31,21 @@ namespace Uetility
 
         private void Button1Click(object sender, System.EventArgs e)
         {
-            int randomInt = new Random().Next(0, 2);
-
-            if (Convert.ToBoolean(randomInt))
-            {
-                RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
-            }
-            else
+            var isPortrait = RequestedOrientation == Android.Content.PM.ScreenOrientation.Portrait;
+            var isUnspecified = RequestedOrientation == Android.Content.PM.ScreenOrientation.Unspecified;
+            if (isPortrait || isUnspecified)
             {
                 RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
             }
-
-            Myprint("rand: " + randomInt);
+            else
+            {
+                RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+            }
+            Myprint(Convert.ToString(RequestedOrientation));
         }
 
         private void Button2Click(object sender, System.EventArgs e)
         {
-            Myprint("clicked button2");
         }
 
         private void Myprint(string s)
