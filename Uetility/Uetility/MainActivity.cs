@@ -20,12 +20,27 @@ namespace Uetility
             SetContentView(Resource.Layout.activity_main);
 
             Button btn1 = FindViewById<Button>(Resource.Id.button1);
-            btn1.Click += button1Click;
+            btn1.Click += Button1Click;
+
+            Button btn2 = FindViewById<Button>(Resource.Id.button2);
+            btn2.Click += Button2Click;
         }
 
-        private void button1Click(object sender, System.EventArgs e)
+        private void Button1Click(object sender, System.EventArgs e)
         {
-            Toast.MakeText(ApplicationContext, "hello", ToastLength.Long).Show();
+            Myprint("clicked button1");
+            RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+        }
+
+        private void Button2Click(object sender, System.EventArgs e)
+        {
+            Myprint("clicked button2");
+            RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
+        }
+
+        private void Myprint(string s)
+        {
+            Toast.MakeText(ApplicationContext, s, ToastLength.Short).Show();
         }
         //[Android(ScreenOrientation = ScreenOrientation.Portrait)]
     }
