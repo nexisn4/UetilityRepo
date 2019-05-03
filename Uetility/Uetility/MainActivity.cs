@@ -46,17 +46,21 @@ namespace Uetility
 
         private void Button2Click(object sender, System.EventArgs e)
         {
+            Intent intent = new Intent();
+            intent.PutExtra("Button1Click", true);
+            PendingIntent pendingIntent = PendingIntent.GetActivity(this, 0, intent, 0);
+
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "location")
-                   .SetAutoCancel(true)
-                   .SetContentTitle("my notificaiton")
+                   .SetContentTitle("my title")
+                   .SetContentText("my text")
                    .SetSmallIcon(Resource.Drawable.abc_scrubber_primary_mtrl_alpha)
-                   .SetContentText("cuck cuck");
+                   .SetAutoCancel(true)
+                   .SetOngoing(true)
+                   .AddAction(Resource.Drawable.abc_ab_share_pack_mtrl_alpha, "BUTTON1", pendingIntent)
+                   .AddAction(Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000, "BUTTON2", pendingIntent);
 
             NotificationManager notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
             notificationManager.Notify(100, builder.Build());
-
-
-            Myprint("kkkkk");
         }
 
         private void Myprint(string s)
