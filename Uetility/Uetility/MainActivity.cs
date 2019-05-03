@@ -15,8 +15,6 @@ namespace Uetility
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        private bool number;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -46,8 +44,7 @@ namespace Uetility
 
         private void Button2Click(object sender, System.EventArgs e)
         {
-            Intent intent = new Intent();
-            intent.PutExtra("Button1Click", true);
+            Intent intent = new Intent(this, typeof(MainActivity));
             PendingIntent pendingIntent = PendingIntent.GetActivity(this, 0, intent, 0);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "location")
@@ -56,8 +53,9 @@ namespace Uetility
                    .SetSmallIcon(Resource.Drawable.abc_scrubber_primary_mtrl_alpha)
                    .SetAutoCancel(true)
                    .SetOngoing(true)
-                   .AddAction(Resource.Drawable.abc_ab_share_pack_mtrl_alpha, "BUTTON1", pendingIntent)
-                   .AddAction(Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000, "BUTTON2", pendingIntent);
+                   .AddAction(Resource.Drawable.abc_ab_share_pack_mtrl_alpha, "BUTTON1", pendingIntent);
+            //.AddAction(Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000, "BUTTON2", pendingIntent);
+            //.AddAction(intent);
 
             NotificationManager notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
             notificationManager.Notify(100, builder.Build());
